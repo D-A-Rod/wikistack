@@ -10,7 +10,7 @@ app.use(morgan('dev'))
 console.log('HELOO DAN');
 
 app.get('/', (req, res, next) => {
-    res.send("Heloo Dan!! This is your server ")
+    res.send("Heloo Josh and Dan!! This is your server ")
 })
 
 
