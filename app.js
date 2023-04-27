@@ -5,6 +5,14 @@ const staticMiddleware = express.static((__dirname, "public"))
 const pg = require('pg')
 const { db, Page, User } = require('./models');
 
+const wikiRouter = require('./routes/wiki');
+const userRouter = require('./routes/users');
+
+
+
+app.use('/wiki', wikiRouter);
+app.use('/user', userRouter);
+
 // checking the above  route
 db.authenticate() 
   .then(() => { 
