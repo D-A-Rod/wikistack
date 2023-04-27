@@ -4,19 +4,19 @@ const app = express();
 const staticMiddleware = express.static((__dirname, "public"));
 const pg = require("pg");
 const { db, Page, User } = require("./models");
-
+const { addPage } = require("./views")
 const wikiRouter = require("./routes/wiki");
-const userRouter = require("./routes/users");
+const userRouter = require("./routes/user");
 
 app.use("/wiki", wikiRouter);
-app.use("/user", userRouter);
+//app.use("/user", userRouter);
 
 // checking the above  route
 db.authenticate().then(() => {
   console.log("connected to the database");
 });
 
-//const path = require('path')
+
 
 app.use(staticMiddleware);
 app.use(morgan("dev"));
@@ -25,6 +25,13 @@ console.log("HELOO DAN");
 app.get("/", (req, res, next) => {
   res.send("Heloo Josh and Dan!! This is your server ");
 });
+
+app.get('/add', (req, res, next) => {
+  res.send(addPage())
+})
+
+
+
 
 const PORT = 3000;
 const init = async () => {

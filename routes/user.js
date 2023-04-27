@@ -1,3 +1,3 @@
-const express = require("express");
-const router = express.Router();
-router.use("/wiki", require("./wiki"));
+//const express = require("express");
+//const router = express.Router();
+//router.use("/wiki",("./wiki"));
