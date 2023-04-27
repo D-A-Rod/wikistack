@@ -3,6 +3,15 @@ const morgan = require('morgan')
 const app = express()
 const staticMiddleware = express.static((__dirname, "public"))
 const pg = require('pg')
+const { db, Page, User } = require('./models');
+
+// checking the above  route
+db.authenticate() 
+  .then(() => { 
+    console.log('connected to the database'); 
+})
+
+
 //const path = require('path')
 
 app.use(staticMiddleware)
@@ -15,8 +24,25 @@ app.get('/', (req, res, next) => {
 
 
 const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`App listening in port ${PORT} http://localhost:3000`);
+const init = async () => {
+    try{
+    await db.sync();
+    app.listen(PORT, () => { 
+      console.log(`Server is listning on port ${PORT}! http://localhost:3000`)
+    //   console.log('hello');
+    })
+    }catch (err) {
+        console.error(err);
+    }
+  }
+  
+  init();
 
-});
+
+
+
+// app.listen(PORT, () => {
+//     console.log(`App listening in port ${PORT} http://localhost:3000`);
+    
+// });
 
